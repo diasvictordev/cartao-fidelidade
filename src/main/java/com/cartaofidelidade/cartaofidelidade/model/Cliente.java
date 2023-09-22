@@ -20,7 +20,7 @@ public class Cliente {
 
     @Id
     @Column(name = "cpf")
-    private Long cpf;
+    private String cpf;
 
     @Column(name = "nome")
     private String nome;

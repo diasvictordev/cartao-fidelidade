@@ -4,5 +4,9 @@ import com.cartaofidelidade.cartaofidelidade.model.Cliente;
 
 public interface ClienteService {
     // mudar o void e criar validação de cadastro
-    void cadastrarCliente(Cliente cliente);
+    Cliente cadastrarCliente(Cliente cliente);
+
+    void validarCpf(String cpf);
+
+    Cliente autenticar(String cpf, String senha);
 }
