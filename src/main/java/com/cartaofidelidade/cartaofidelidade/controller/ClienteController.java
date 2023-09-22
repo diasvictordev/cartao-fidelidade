@@ -18,16 +18,9 @@ public class ClienteController {
     }
 
     @PostMapping
-    public ResponseEntity salvar(@RequestBody Cliente cliente){
-        Cliente clienteacadastar = Cliente.builder().nome(cliente.getNome()).
-                cpf(cliente.getCpf()).
-                endereco(cliente.getEndereco()).
-                telefone(cliente.getTelefone()).
-                dataNascimento(cliente.getDataNascimento()).
-                senha(cliente.getSenha()).
-                build();
+    public ResponseEntity<?> salvar(@RequestBody Cliente cliente){
         try {
-            Cliente clienteSalvo = clienteService.cadastrarCliente(clienteacadastar);
+            Cliente clienteSalvo = clienteService.cadastrarCliente(cliente);
             return new ResponseEntity(clienteSalvo, HttpStatus.CREATED);
         }
         catch(RegraNegocioException e){
@@ -36,7 +29,7 @@ public class ClienteController {
         }
     }
     @PostMapping("/login")
-    public ResponseEntity autenticar(@RequestBody Cliente cliente){
+    public ResponseEntity<?> autenticar(@RequestBody Cliente cliente){
         try {
             Cliente clienteautenticado = clienteService.autenticar(cliente.getCpf(), cliente.getSenha());
             return ResponseEntity.ok(clienteautenticado);

@@ -12,13 +12,16 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "cliente", schema = "cartao_fidelidade")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Cliente {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name= "id")
+    private Long id;
+
     @Column(name = "cpf")
     private String cpf;
 
@@ -32,7 +35,7 @@ public class Cliente {
     private LocalDate dataNascimento;
 
     @Column(name = "telefone")
-    private Integer telefone;
+    private Long telefone;
 
     @Column(name = "senha")
     private String senha;
