@@ -32,7 +32,7 @@ public class ClienteController {
     public ResponseEntity<?> autenticar(@RequestBody Cliente cliente){
         try {
             Cliente clienteautenticado = clienteService.autenticar(cliente.getCpf(), cliente.getSenha());
-            return ResponseEntity.ok(clienteautenticado);
+            return ResponseEntity.ok("Logado!");
         }
         catch (RegraNegocioException e){
             return ResponseEntity.badRequest().body(e.getMessage());
