@@ -18,8 +18,12 @@ import java.util.List;
 public class Loja {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name= "id")
+    private Long id;
+
     @Column(name = "cnpj")
-    private Long cnpj;
+    private String cnpj;
 
     @Column(name = "nome")
     private String nomeLoja;
