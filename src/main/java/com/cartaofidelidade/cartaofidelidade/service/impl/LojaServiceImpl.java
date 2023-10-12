@@ -34,7 +34,7 @@ public class LojaServiceImpl implements LojaService {
     public void validarCnpj(String cnpj){
         boolean existe = lojaRepository.existsByCnpj(cnpj);
         if (existe) {
-            throw new RegraNegocioException("Já existe uma loja com esse cnpj!");
+            throw new RegraNegocioException("Já existe uma loja com esse CNPJ!");
         }
         if (cnpj.equals("00000000000000") ||
                 cnpj.equals("11111111111111") ||
@@ -71,6 +71,10 @@ public class LojaServiceImpl implements LojaService {
         return loja.get();
     }
 
-
-
+    @Override
+    public Carteira criarCarteira(Cliente cliente, Loja loja, Carteira carteira){
+        carteira.setLoja(loja);
+        carteira.setCliente(cliente);
+        return carteiraRepository.save(carteira);
+    }
 }
