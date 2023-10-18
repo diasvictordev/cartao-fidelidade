@@ -9,6 +9,7 @@ import com.cartaofidelidade.cartaofidelidade.repository.LojaRepository;
 import com.cartaofidelidade.cartaofidelidade.service.LojaService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,6 +30,8 @@ public class LojaServiceImpl implements LojaService {
         validarCnpj(loja.getCnpj());
         return lojaRepository.save(loja);
     }
+
+
 
     @Override
     public void validarCnpj(String cnpj){
@@ -77,4 +80,6 @@ public class LojaServiceImpl implements LojaService {
         carteira.setCliente(cliente);
         return carteiraRepository.save(carteira);
     }
+
+
 }

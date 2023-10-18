@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/cliente")
 public class ClienteController {
@@ -39,5 +41,15 @@ public class ClienteController {
         }
     }
 
+    @GetMapping
+    public ResponseEntity<?> listarClientes(){
+        List<Cliente> clientes = clienteService.listarClientes();
+        if(clientes.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não existem clientes cadastrados!");
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.OK).body(clientes);
+        }
+    }
 
 }

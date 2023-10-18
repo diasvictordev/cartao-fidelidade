@@ -6,6 +6,7 @@ import com.cartaofidelidade.cartaofidelidade.repository.ClienteRepository;
 import com.cartaofidelidade.cartaofidelidade.service.ClienteService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,6 +23,17 @@ public class ClienteServiceImpl implements ClienteService {
         public Cliente cadastrarCliente(Cliente cliente){
                 validarCpf(cliente.getCpf());
                 return clienteRepository.save(cliente);
+        }
+
+        @Override
+        public List<Cliente> listarClientes(){
+                return clienteRepository.findAll();
+        }
+
+
+        @Override
+        public void excluirConta(Cliente cliente){
+                clienteRepository.delete(cliente);
         }
 
         @Override
