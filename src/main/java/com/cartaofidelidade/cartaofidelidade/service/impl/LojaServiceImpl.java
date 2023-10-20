@@ -42,6 +42,17 @@ public class LojaServiceImpl implements LojaService {
         }
     }
 
+    @Override
+    public Optional<Loja> listarLojaPorId(Long id){
+        Optional<Loja> loja= lojaRepository.findById(id);
+        if(loja.isPresent()){
+            return loja;
+        }
+        else {
+            throw new RegraNegocioException("A loja não foi encontrada para o id informado!");
+        }
+    }
+
 
     @Override
     public void validarCnpj(String cnpj){

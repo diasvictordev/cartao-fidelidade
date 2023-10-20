@@ -12,6 +12,8 @@ public interface LojaService {
 
     List<Loja> listarLojas();
 
+    Optional<Loja> listarLojaPorId(Long id);
+
     void validarCnpj(String cnpj);
 
     Loja autenticar(String cnpj, String senha);
