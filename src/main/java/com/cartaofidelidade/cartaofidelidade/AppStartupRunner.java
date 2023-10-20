@@ -53,7 +53,7 @@ public class AppStartupRunner implements ApplicationRunner {
 
     private void saveLoja() {
         Loja loja = new Loja();
-        loja.setCnpj("12345678910");
+        loja.setCnpj("10000000000001");
         loja.setNomeLoja("Loja 1");
         loja.setEndereco("Rua 1");
         loja.setSenha("1234");
@@ -63,7 +63,7 @@ public class AppStartupRunner implements ApplicationRunner {
 
     private void saveCliente() {
         Cliente cliente = new Cliente();
-        cliente.setCpf("12345678910123");
+        cliente.setCpf("70240686112");
         cliente.setNome("João");
         cliente.setEndereco("Rua 1");
         cliente.setDataNascimento(LocalDate.of(2000, 1, 1));
