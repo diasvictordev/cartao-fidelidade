@@ -47,4 +47,16 @@ public class CarteiraController {
         }
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<?> listarCarteiraPorId(@PathVariable Long id){
+        try {
+            Optional<Carteira> carteira = lojaService.procurarCarteiraporId(id);
+            return new ResponseEntity(carteira, HttpStatus.OK);
+        }
+        catch(RegraNegocioException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+
+        }
+    }
+
 }
