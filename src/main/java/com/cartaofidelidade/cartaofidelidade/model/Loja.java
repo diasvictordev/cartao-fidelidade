@@ -11,7 +11,6 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "loja", schema = "cartao_fidelidade")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
