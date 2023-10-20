@@ -31,6 +31,16 @@ public class LojaServiceImpl implements LojaService {
         return lojaRepository.save(loja);
     }
 
+    @Override
+    public List<Loja> listarLojas(){
+        List<Loja> lojas = lojaRepository.findAll();
+        if(!lojas.isEmpty()){
+            return lojas;
+        }
+        else{
+            throw new RegraNegocioException("Nenhuma loja cadastrada!");
+        }
+    }
 
 
     @Override
@@ -79,6 +89,24 @@ public class LojaServiceImpl implements LojaService {
         carteira.setLoja(loja);
         carteira.setCliente(cliente);
         return carteiraRepository.save(carteira);
+    }
+
+    @Override
+    public Optional<Carteira> procurarCarteiraporId(Long id){
+        Optional <Carteira> carteira = carteiraRepository.findById(id);
+        if (carteira.isPresent()){
+            return carteira;
+        }
+        else {
+            throw new RegraNegocioException("Carteira não encontrada!");
+        }
+    }
+
+    @Override
+    public void adicionarPontosNaCarteira(Long id, Integer pontos){
+        Optional <Carteira> carteira = procurarCarteiraporId(id);
+        Integer pontosExistentes = carteira.get().getQuantidadePontos();
+        carteira.get().setQuantidadePontos(pontosExistentes + pontos);
     }
 
 

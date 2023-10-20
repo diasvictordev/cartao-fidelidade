@@ -27,4 +27,8 @@ public class Produto {
 
     @Column(name = "descricao")
     private String descricao;
+
+    @ManyToOne
+    @JoinColumn(name = "loja_id")
+    private Loja loja;
 }
