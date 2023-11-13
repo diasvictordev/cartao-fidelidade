@@ -22,10 +22,10 @@ public class Carteira {
     private Integer quantidadePontos;
 
     @ManyToOne
-    @JoinColumn(name = "cnpj")
+    @JoinColumn(name = "loja")
     private Loja loja;
 
     @ManyToOne
-    @JoinColumn(name = "cpf")
+    @JoinColumn(name = "cliente")
     private Cliente cliente;
 }

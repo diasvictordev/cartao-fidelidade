@@ -11,23 +11,18 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Produto {
+public class Venda {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
-
-    @Column(name = "nome")
-    private String nomeProduto;
-
-    @Column(name = "valor")
-    private Float valor;
-
-    @Column(name = "descricao")
-    private String descricao;
 
     @ManyToOne
     @JoinColumn(name = "loja")
     private Loja loja;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente")
+    private Cliente cliente;
+
 }

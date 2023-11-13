@@ -1,5 +1,6 @@
 package com.cartaofidelidade.cartaofidelidade.model;
 
+import com.cartaofidelidade.cartaofidelidade.model.userenums.UserEnums;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,6 +40,10 @@ public class Cliente {
 
     @Column(name = "senha")
     private String senha;
+
+    @Column(name = "papel")
+    @Enumerated(value= EnumType.STRING)
+    private UserEnums papel;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Produto> premioResgatado = new ArrayList<>();
