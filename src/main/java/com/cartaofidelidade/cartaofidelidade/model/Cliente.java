@@ -1,6 +1,7 @@
 package com.cartaofidelidade.cartaofidelidade.model;
 
 import com.cartaofidelidade.cartaofidelidade.model.userenums.UserEnums;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
