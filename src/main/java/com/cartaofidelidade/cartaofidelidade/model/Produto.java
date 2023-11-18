@@ -21,8 +21,8 @@ public class Produto {
     @Column(name = "nome")
     private String nomeProduto;
 
-    @Column(name = "valor")
-    private Float valor;
+    @Column(name = "pontos")
+    private Integer pontos;
 
     @Column(name = "descricao")
     private String descricao;
