@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -34,10 +35,10 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public ResponseEntity<?> listarProdutos(@RequestBody Loja loja){
+    public ResponseEntity<?> listarProduto(@RequestBody Long id){
         try {
-            List <Produto> produtos = produtoService.listarProdutosdaLoja(loja);
-            return new ResponseEntity(produtos, HttpStatus.OK);
+            Optional<Produto> produto = produtoService.buscarProdutoPorId(id);
+            return new ResponseEntity(produto, HttpStatus.OK);
         }
         catch(RegraNegocioException e){
             return ResponseEntity.badRequest().body(e.getMessage());

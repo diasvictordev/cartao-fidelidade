@@ -11,9 +11,11 @@ public interface ClienteService {
 
     List<Cliente> listarClientes();
 
-    void excluirConta(Cliente cliente);
+    void excluirConta(Long id);
 
     void validarCpf(String cpf);
 
     Cliente autenticar(String cpf, String senha);
+
+    Optional<Cliente> buscarClienteporId(Long id);
 }

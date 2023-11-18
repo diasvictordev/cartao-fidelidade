@@ -32,8 +32,8 @@ public class ClienteServiceImpl implements ClienteService {
 
 
         @Override
-        public void excluirConta(Cliente cliente){
-                clienteRepository.delete(cliente);
+        public void excluirConta(Long id){
+                clienteRepository.deleteById(id);
         }
 
         @Override
@@ -78,6 +78,10 @@ public class ClienteServiceImpl implements ClienteService {
         }
 
 
+        @Override
+        public Optional<Cliente> buscarClienteporId(Long id){
+                return clienteRepository.findById(id);
+        }
 
 
 

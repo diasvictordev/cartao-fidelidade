@@ -48,5 +48,4 @@ public class Cliente {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Produto> premioResgatado = new ArrayList<>();
 
-
 }

@@ -28,7 +28,18 @@ public class LojaServiceImpl implements LojaService {
     @Override
     public Loja cadastrarLoja(Loja loja){
         validarCnpj(loja.getCnpj());
+        loja.setAtiva(true);
         return lojaRepository.save(loja);
+    }
+
+    @Override
+    public void desativarLoja(Loja loja){
+        loja.setAtiva(false);
+    }
+
+    @Override
+    public void ativarLoja(Loja loja){
+        loja.setAtiva(true);
     }
 
     @Override
@@ -69,6 +80,11 @@ public class LojaServiceImpl implements LojaService {
                 (cnpj.length() != 14)){
             throw new RegraNegocioException("CNPJ inválido, digite novamente!");
         }
+    }
+
+    @Override
+    public void excluirLoja(Long id){
+        lojaRepository.deleteById(id);
     }
 
     @Override
@@ -119,6 +135,18 @@ public class LojaServiceImpl implements LojaService {
         Integer pontosExistentes = carteira.get().getQuantidadePontos();
         carteira.get().setQuantidadePontos(pontosExistentes + pontos);
     }
+
+    @Override
+    public List<Carteira> listarCarteiras(){
+        List<Carteira> carteiras = carteiraRepository.findAll();
+        if(!carteiras.isEmpty()){
+            return carteiras;
+        }
+        else{
+            throw new RegraNegocioException("Nenhuma carteira cadastrada!");
+        }
+    }
+
 
 
 }

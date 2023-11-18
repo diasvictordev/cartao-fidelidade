@@ -1,8 +1,10 @@
 package com.cartaofidelidade.cartaofidelidade;
 
+import com.cartaofidelidade.cartaofidelidade.model.Carteira;
 import com.cartaofidelidade.cartaofidelidade.model.Cliente;
 import com.cartaofidelidade.cartaofidelidade.model.Loja;
 import com.cartaofidelidade.cartaofidelidade.model.Produto;
+import com.cartaofidelidade.cartaofidelidade.repository.CarteiraRepository;
 import com.cartaofidelidade.cartaofidelidade.repository.ClienteRepository;
 import com.cartaofidelidade.cartaofidelidade.repository.LojaRepository;
 import com.cartaofidelidade.cartaofidelidade.repository.ProdutoRepository;
@@ -26,12 +28,16 @@ public class AppStartupRunner implements ApplicationRunner {
     @Autowired
     private ProdutoRepository produtoRepository;
 
+    @Autowired
+    private CarteiraRepository carteiraRepository;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
         saveCliente();
         saveLoja();
 
         saveProdutos();
+        saveCarteira();
     }
 
     private void saveProdutos() {
@@ -72,6 +78,12 @@ public class AppStartupRunner implements ApplicationRunner {
         cliente.setPremioResgatado(new ArrayList<>());
 
         clienteRepository.save(cliente);
+    }
+
+    private void saveCarteira() {
+        Carteira carteira = new Carteira();
+        carteira.setQuantidadePontos(10);
+        carteiraRepository.save(carteira);
     }
 
 

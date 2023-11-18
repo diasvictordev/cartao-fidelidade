@@ -2,6 +2,7 @@ package com.cartaofidelidade.cartaofidelidade.controller;
 
 
 import com.cartaofidelidade.cartaofidelidade.exceptions.RegraNegocioException;
+import com.cartaofidelidade.cartaofidelidade.model.Cliente;
 import com.cartaofidelidade.cartaofidelidade.model.Loja;
 import com.cartaofidelidade.cartaofidelidade.service.impl.LojaServiceImpl;
 import org.springframework.http.HttpStatus;
@@ -66,4 +67,32 @@ public class LojaController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletarLoja(@PathVariable Long id){
+        return lojaService.listarLojaPorId(id).map(entidade ->{
+            lojaService.excluirLoja(entidade.getId());
+            return new ResponseEntity<>( HttpStatus.NO_CONTENT);
+        }).orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao excluir!"));
+
+    }
+    @PutMapping
+    public ResponseEntity<?> editarLoja(@RequestBody Loja loja){
+        return lojaService.listarLojaPorId(loja.getId()).map(entidade -> {
+            lojaService.cadastrarLoja(loja);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }).orElseGet(() ->
+                new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+    }
+
+    @PostMapping("/desativarloja")
+    public ResponseEntity desativarLoja(@RequestBody Loja loja){
+        lojaService.desativarLoja(loja);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/ativarloja")
+    public ResponseEntity ativarLoja(@RequestBody Loja loja){
+        lojaService.ativarLoja(loja);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

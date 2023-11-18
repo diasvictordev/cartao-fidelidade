@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -51,6 +52,18 @@ public class CarteiraController {
     public ResponseEntity<?> listarCarteiraPorId(@PathVariable Long id){
         try {
             Optional<Carteira> carteira = lojaService.procurarCarteiraporId(id);
+            return new ResponseEntity(carteira, HttpStatus.OK);
+        }
+        catch(RegraNegocioException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity<?> listarCarteiras(){
+        try {
+            List<Carteira> carteira = lojaService.listarCarteiras();
             return new ResponseEntity(carteira, HttpStatus.OK);
         }
         catch(RegraNegocioException e){

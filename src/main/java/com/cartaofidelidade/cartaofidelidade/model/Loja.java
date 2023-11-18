@@ -35,4 +35,7 @@ public class Loja {
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Produto> produtos = new ArrayList<>();
+
+    @Column(name = "ativa")
+    private Boolean ativa;
 }

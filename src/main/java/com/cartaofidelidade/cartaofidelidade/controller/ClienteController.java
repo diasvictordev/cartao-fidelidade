@@ -5,6 +5,7 @@ import com.cartaofidelidade.cartaofidelidade.model.Cliente;
 import com.cartaofidelidade.cartaofidelidade.service.impl.ClienteServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -50,6 +51,24 @@ public class ClienteController {
         else {
             return ResponseEntity.status(HttpStatus.OK).body(clientes);
         }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletarCliente(@PathVariable Long id){
+        return clienteService.buscarClienteporId(id).map(entidade ->{
+            clienteService.excluirConta(entidade.getId());
+            return new ResponseEntity<>( HttpStatus.NO_CONTENT);
+        }).orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao excluir!"));
+
+    }
+
+    @PutMapping
+    public ResponseEntity<?> editarCliente(@RequestBody Cliente cliente){
+        return clienteService.buscarClienteporId(cliente.getId()).map(entidade -> {
+            clienteService.cadastrarCliente(cliente);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }).orElseGet(() ->
+                new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
 
 }
