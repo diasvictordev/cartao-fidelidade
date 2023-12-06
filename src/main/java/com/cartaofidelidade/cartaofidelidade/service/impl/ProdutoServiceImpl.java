@@ -74,4 +74,11 @@ public class ProdutoServiceImpl implements ProdutoService {
         }
     }
 
+    public List<Produto> listarProdutos() {
+        List<Produto> produtos = produtoRepository.findAll();
+        if(produtos.isEmpty()) {
+            throw new RegraNegocioException("Não há produtos cadastrados!");
+        }
+        return produtos;
+    }
 }

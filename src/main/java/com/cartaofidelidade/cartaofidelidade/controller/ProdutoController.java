@@ -22,6 +22,18 @@ public class ProdutoController {
         this.produtoService = produtoService;
     }
 
+    @GetMapping("/listar")
+    public ResponseEntity<?> listarTodosProdutos(){
+        try {
+            List<Produto> produtos = produtoService.listarProdutos();
+            return new ResponseEntity(produtos, HttpStatus.OK);
+        }
+        catch(RegraNegocioException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+
+        }
+    }
+
     @PostMapping
     public ResponseEntity<?> cadastrarProduto(@RequestBody Produto produto, Loja loja){
         try {
