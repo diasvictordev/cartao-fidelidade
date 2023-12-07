@@ -1,6 +1,6 @@
 package com.cartaofidelidade.cartaofidelidade.model.userenums;
 
-public enum UserEnums {
+public enum LojaEnums {
     ADMIN,
-    CLIENT
+    LOJA
 }

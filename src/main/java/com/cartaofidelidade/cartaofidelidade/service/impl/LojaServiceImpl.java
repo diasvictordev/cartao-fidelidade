@@ -5,6 +5,7 @@ import com.cartaofidelidade.cartaofidelidade.model.Carteira;
 import com.cartaofidelidade.cartaofidelidade.model.Cliente;
 import com.cartaofidelidade.cartaofidelidade.model.Loja;
 import com.cartaofidelidade.cartaofidelidade.repository.CarteiraRepository;
+import com.cartaofidelidade.cartaofidelidade.repository.ClienteRepository;
 import com.cartaofidelidade.cartaofidelidade.repository.LojaRepository;
 import com.cartaofidelidade.cartaofidelidade.service.LojaService;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,12 @@ public class LojaServiceImpl implements LojaService {
 
     private CarteiraRepository carteiraRepository;
 
-    public LojaServiceImpl(LojaRepository lojaRepository, CarteiraRepository carteiraRepository){
+    private ClienteRepository clienteRepository;
+
+    public LojaServiceImpl(LojaRepository lojaRepository, CarteiraRepository carteiraRepository, ClienteRepository clienteRepository){
         this.lojaRepository = lojaRepository;
         this.carteiraRepository = carteiraRepository;
+        this.clienteRepository = clienteRepository;
     }
 
 
@@ -112,9 +116,18 @@ public class LojaServiceImpl implements LojaService {
     }
 
     @Override
-    public Carteira criarCarteira(Cliente cliente, Loja loja, Carteira carteira){
-        carteira.setLoja(loja);
+    public Carteira criarCarteira(Integer quantidadePontos, Long clienteId, Long lojaId) {
+        Cliente cliente = clienteRepository.findById(clienteId)
+                .orElseThrow(() -> new RegraNegocioException("Cliente não encontrado"));
+
+        Loja loja = lojaRepository.findById(lojaId)
+                .orElseThrow(() -> new RegraNegocioException("Loja não encontrada"));
+
+        Carteira carteira = new Carteira();
         carteira.setCliente(cliente);
+        carteira.setLoja(loja);
+        carteira.setQuantidadePontos(quantidadePontos);
+
         return carteiraRepository.save(carteira);
     }
 
@@ -146,7 +159,5 @@ public class LojaServiceImpl implements LojaService {
             throw new RegraNegocioException("Nenhuma carteira cadastrada!");
         }
     }
-
-
 
 }

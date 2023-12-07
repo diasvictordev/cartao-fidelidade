@@ -1,5 +1,6 @@
 package com.cartaofidelidade.cartaofidelidade.model;
 
+import com.cartaofidelidade.cartaofidelidade.model.userenums.LojaEnums;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,4 +39,8 @@ public class Loja {
 
     @Column(name = "ativa")
     private Boolean ativa;
+
+    @Column(name = "papel")
+    @Enumerated(value= EnumType.STRING)
+    private LojaEnums papel;
 }

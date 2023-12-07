@@ -24,14 +24,16 @@ public class CarteiraController {
     }
 
     @PostMapping
-    public ResponseEntity<?> criarCarteira(@RequestBody Cliente cliente, Loja loja, Carteira carteira){
+    public ResponseEntity<?> criarCarteira(@RequestBody Carteira carteira, Long clienteId, Long lojaId) {
         try {
-            Carteira carteirasalva = lojaService.criarCarteira(cliente, loja, carteira);
-            return new ResponseEntity(carteirasalva, HttpStatus.CREATED);
-        }
-        catch(RegraNegocioException e){
+            Carteira carteiraASalvar = lojaService.criarCarteira(
+                    carteira.getQuantidadePontos(),
+                    clienteId,
+                    lojaId
+            );
+            return new ResponseEntity<>(carteira, HttpStatus.CREATED);
+        } catch (RegraNegocioException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
-
         }
     }
 

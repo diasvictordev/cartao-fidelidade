@@ -43,14 +43,14 @@ public class AppStartupRunner implements ApplicationRunner {
     private void saveProdutos() {
         Produto produto = new Produto();
         produto.setNomeProduto("Produto 1");
-        produto.setValor(10.0f);
+        produto.setPontos(30);
         produto.setDescricao("Descrição 1");
         produto.setLoja(lojaRepository.findById(1L).get());
 
         produtoRepository.save(produto);
 
         produto.setNomeProduto("Produto 2");
-        produto.setValor(20.0f);
+        produto.setPontos(30);
         produto.setDescricao("Descrição 2");
         produto.setLoja(lojaRepository.findById(1L).get());
 

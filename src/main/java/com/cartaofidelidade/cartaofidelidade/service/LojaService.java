@@ -24,7 +24,8 @@ public interface LojaService {
 
     Loja autenticar(String cnpj, String senha);
 
-    Carteira criarCarteira(Cliente cliente, Loja loja, Carteira carteira);
+
+    Carteira criarCarteira(Integer quantidadePontos, Long clienteId, Long lojaId);
 
     Optional<Carteira> procurarCarteiraporId(Long id);
 
