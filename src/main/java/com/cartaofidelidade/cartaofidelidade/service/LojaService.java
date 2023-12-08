@@ -35,9 +35,11 @@ public interface LojaService {
 
     Carteira procurarCarteiraporIdDoUsuario(Long id);
 
-    void mudarPontosNaCarteira(Long id, Integer pontos);
+    void mudarPontosNaCarteira(Carteira carteira, Integer pontos);
 
     List<Carteira> listarCarteiras();
 
     Optional<Loja> getLojaByCnpj(String cnpj);
+
+    void deletarCarteira(Long id);
 }

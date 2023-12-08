@@ -41,7 +41,7 @@ public class CarteiraController {
     public ResponseEntity<?> adicionarPontosaCarteira(@PathVariable Long id, @RequestBody Integer pontos){
         try {
             Carteira carteirasalva = lojaService.procurarCarteiraporId(id);
-            lojaService.mudarPontosNaCarteira(id, pontos);
+            lojaService.mudarPontosNaCarteira(carteirasalva, pontos);
             return new ResponseEntity(carteirasalva, HttpStatus.OK);
         }
         catch(RegraNegocioException e){
@@ -79,6 +79,17 @@ public class CarteiraController {
         try {
             Integer pontos = lojaService.buscarQuantidadePontosCarteiraDoUsuario(id);
             return new ResponseEntity(pontos, HttpStatus.OK);
+        }
+        catch(RegraNegocioException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletarCarteira(@PathVariable Long id){
+        try {
+            lojaService.deletarCarteira(id);
+            return new ResponseEntity(HttpStatus.OK);
         }
         catch(RegraNegocioException e){
             return ResponseEntity.badRequest().body(e.getMessage());

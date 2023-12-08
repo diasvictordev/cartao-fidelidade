@@ -183,10 +183,9 @@ public class LojaServiceImpl implements LojaService {
     }
 
     @Override
-    public void mudarPontosNaCarteira(Long id, Integer pontos){
-        Carteira carteira = procurarCarteiraporId(id);
-        Integer pontosExistentes = carteira.getQuantidadePontos();
-        carteira.setQuantidadePontos(pontosExistentes + pontos);
+    public void mudarPontosNaCarteira(Carteira carteira, Integer pontos){
+        carteira.setQuantidadePontos(carteira.getQuantidadePontos() + pontos);
+        carteiraRepository.save(carteira);
     }
 
     @Override
@@ -209,5 +208,9 @@ public class LojaServiceImpl implements LojaService {
         else {
             throw new RegraNegocioException("A loja não foi encontrada para o cnpj informado!");
         }
+    }
+    @Override
+    public void deletarCarteira(Long id) {
+        carteiraRepository.deleteById(id);
     }
 }
