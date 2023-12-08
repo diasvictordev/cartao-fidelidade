@@ -53,6 +53,12 @@ public class ClienteController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> buscarClientePorId(@PathVariable Long id){
+        return clienteService.buscarClienteporId(id).map(entidade -> new ResponseEntity<>(entidade, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletarCliente(@PathVariable Long id){
         return clienteService.buscarClienteporId(id).map(entidade ->{
