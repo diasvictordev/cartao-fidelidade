@@ -45,6 +45,17 @@ public class LojaController {
         }
     }
 
+    @PostMapping("login/admin")
+    public ResponseEntity<?> autenticarAdmin(@RequestBody Loja loja){
+        try {
+            Loja lojaAutenticada = lojaService.autenticarAdmin(loja.getCnpj(), loja.getSenha(),loja.getPapel());
+            return ResponseEntity.ok("Logado!");
+        }
+        catch (RegraNegocioException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @GetMapping
     public ResponseEntity<?> listarLojas(){
         try {

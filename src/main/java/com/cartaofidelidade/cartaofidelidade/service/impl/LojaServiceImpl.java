@@ -4,6 +4,7 @@ import com.cartaofidelidade.cartaofidelidade.exceptions.RegraNegocioException;
 import com.cartaofidelidade.cartaofidelidade.model.Carteira;
 import com.cartaofidelidade.cartaofidelidade.model.Cliente;
 import com.cartaofidelidade.cartaofidelidade.model.Loja;
+import com.cartaofidelidade.cartaofidelidade.model.userenums.LojaEnums;
 import com.cartaofidelidade.cartaofidelidade.repository.CarteiraRepository;
 import com.cartaofidelidade.cartaofidelidade.repository.ClienteRepository;
 import com.cartaofidelidade.cartaofidelidade.repository.LojaRepository;
@@ -111,6 +112,33 @@ public class LojaServiceImpl implements LojaService {
 
         if(!loja.get().getSenha().equals(senha)) {
             throw new RegraNegocioException("Senha inválida. Tente novamente!");
+        }
+        return loja.get();
+    }
+
+    @Override
+    public Loja autenticarAdmin(String cnpj, String senha, LojaEnums papel) {
+
+        Optional<Loja> loja = lojaRepository.findByCnpj(cnpj);
+
+        if(!loja.isPresent()) {
+            if (cnpj.equals("00000000000000") ||
+                    cnpj.equals("11111111111111") ||
+                    cnpj.equals("22222222222222") || cnpj.equals("33333333333333") ||
+                    cnpj.equals("44444444444444") || cnpj.equals("55555555555555") ||
+                    cnpj.equals("66666666666666") || cnpj.equals("77777777777777") ||
+                    cnpj.equals("88888888888888") || cnpj.equals("99999999999999") ||
+                    (cnpj.length() != 14)){
+                throw new RegraNegocioException("CNPJ inválido, digite novamente!");
+            }
+            throw new RegraNegocioException("Loja não encontrada para o cnpj informado. Faça o cadastro!");
+        }
+
+        if(!loja.get().getSenha().equals(senha)) {
+            throw new RegraNegocioException("Senha inválida. Tente novamente!");
+        }
+        if(!loja.get().getPapel().equals(LojaEnums.ADMIN)){
+            throw new RegraNegocioException("Você não é admin!");
         }
         return loja.get();
     }

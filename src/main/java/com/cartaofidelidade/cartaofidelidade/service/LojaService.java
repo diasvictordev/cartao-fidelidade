@@ -3,6 +3,7 @@ package com.cartaofidelidade.cartaofidelidade.service;
 import com.cartaofidelidade.cartaofidelidade.model.Carteira;
 import com.cartaofidelidade.cartaofidelidade.model.Cliente;
 import com.cartaofidelidade.cartaofidelidade.model.Loja;
+import com.cartaofidelidade.cartaofidelidade.model.userenums.LojaEnums;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +25,7 @@ public interface LojaService {
 
     Loja autenticar(String cnpj, String senha);
 
+    Loja autenticarAdmin(String cnpj, String senha, LojaEnums papel);
 
     Carteira criarCarteira(Integer quantidadePontos, Long clienteId, Long lojaId);
 
