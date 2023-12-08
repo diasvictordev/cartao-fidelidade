@@ -67,10 +67,10 @@ public class LojaController {
         }
     }
 
-    @GetMapping("/{cnpj}")
+    @GetMapping("/cnpj/{cnpj}")
     public ResponseEntity<?> getLojaByCnpj(@PathVariable String cnpj){
         try {
-            Optional<Loja> loja = lojaService.getLojaByCnpj(cnpj);
+            Optional<Loja> loja = lojaService.getLojaByCnpj(cnpj.substring(1,15));
             return new ResponseEntity(loja, HttpStatus.OK);
         }
         catch (RegraNegocioException e){

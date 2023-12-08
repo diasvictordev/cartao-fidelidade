@@ -83,6 +83,8 @@ public class AppStartupRunner implements ApplicationRunner {
     private void saveCarteira() {
         Carteira carteira = new Carteira();
         carteira.setQuantidadePontos(10);
+        carteira.setCliente(clienteRepository.findById(1L).get());
+        carteira.setLoja(lojaRepository.findById(1L).get());
         carteiraRepository.save(carteira);
     }
 
