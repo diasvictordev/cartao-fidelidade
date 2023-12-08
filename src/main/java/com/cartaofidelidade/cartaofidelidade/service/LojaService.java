@@ -27,9 +27,13 @@ public interface LojaService {
 
     Carteira criarCarteira(Integer quantidadePontos, Long clienteId, Long lojaId);
 
-    Optional<Carteira> procurarCarteiraporId(Long id);
+    Carteira procurarCarteiraporId(Long id);
 
-    void adicionarPontosNaCarteira(Long id, Integer pontos);
+    Integer buscarQuantidadePontosCarteiraDoUsuario(Long idCliente);
+
+    Carteira procurarCarteiraporIdDoUsuario(Long id);
+
+    void mudarPontosNaCarteira(Long id, Integer pontos);
 
     List<Carteira> listarCarteiras();
 }

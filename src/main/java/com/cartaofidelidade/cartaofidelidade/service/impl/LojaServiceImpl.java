@@ -132,21 +132,33 @@ public class LojaServiceImpl implements LojaService {
     }
 
     @Override
-    public Optional<Carteira> procurarCarteiraporId(Long id){
-        Optional <Carteira> carteira = carteiraRepository.findById(id);
-        if (carteira.isPresent()){
-            return carteira;
-        }
-        else {
-            throw new RegraNegocioException("Carteira não encontrada!");
-        }
+    public Carteira procurarCarteiraporId(Long id) {
+        return carteiraRepository.findById(id)
+                .orElseThrow(() -> new RegraNegocioException("Carteira não encontrada para o ID: " + id));
     }
 
     @Override
-    public void adicionarPontosNaCarteira(Long id, Integer pontos){
-        Optional <Carteira> carteira = procurarCarteiraporId(id);
-        Integer pontosExistentes = carteira.get().getQuantidadePontos();
-        carteira.get().setQuantidadePontos(pontosExistentes + pontos);
+    public Integer buscarQuantidadePontosCarteiraDoUsuario(Long idCliente) {
+        Carteira carteira = procurarCarteiraporIdDoUsuario(idCliente);
+        return carteira.getQuantidadePontos();
+    }
+
+    @Override
+    public Carteira procurarCarteiraporIdDoUsuario(Long id) {
+        List<Carteira> carteiras = carteiraRepository.findAll(); // Supondo que seja possível buscar todas as carteiras
+        for (Carteira carteira : carteiras) {
+            if (carteira.getCliente().getId().equals(id)) {
+                return carteira;
+            }
+        }
+        throw new RegraNegocioException("Carteira não encontrada para o cliente com ID: " + id);
+    }
+
+    @Override
+    public void mudarPontosNaCarteira(Long id, Integer pontos){
+        Carteira carteira = procurarCarteiraporId(id);
+        Integer pontosExistentes = carteira.getQuantidadePontos();
+        carteira.setQuantidadePontos(pontosExistentes + pontos);
     }
 
     @Override
