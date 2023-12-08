@@ -200,4 +200,14 @@ public class LojaServiceImpl implements LojaService {
         }
     }
 
+    @Override
+    public Optional<Loja> getLojaByCnpj(String cnpj) {
+        Optional<Loja> loja = lojaRepository.findByCnpj(cnpj);
+        if(loja.isPresent()){
+            return loja;
+        }
+        else {
+            throw new RegraNegocioException("A loja não foi encontrada para o cnpj informado!");
+        }
+    }
 }

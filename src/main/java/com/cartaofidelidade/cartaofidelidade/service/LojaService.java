@@ -38,4 +38,6 @@ public interface LojaService {
     void mudarPontosNaCarteira(Long id, Integer pontos);
 
     List<Carteira> listarCarteiras();
+
+    Optional<Loja> getLojaByCnpj(String cnpj);
 }
