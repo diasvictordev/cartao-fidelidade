@@ -34,6 +34,18 @@ public class ProdutoController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> listarProdutoPorId(@PathVariable Long id){
+        try {
+            Optional<Produto> produto = produtoService.buscarProdutoPorId(id);
+            return new ResponseEntity(produto, HttpStatus.OK);
+        }
+        catch(RegraNegocioException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+
+        }
+    }
+
     @PostMapping
     public ResponseEntity<?> cadastrarProduto(@RequestBody Produto produto, Loja loja){
         try {
