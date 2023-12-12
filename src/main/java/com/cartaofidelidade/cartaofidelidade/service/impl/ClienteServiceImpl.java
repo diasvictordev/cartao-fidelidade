@@ -83,7 +83,10 @@ public class ClienteServiceImpl implements ClienteService {
                 return clienteRepository.findById(id);
         }
 
-
+        @Override
+        public Optional<Cliente> buscarClienteporCpf(String cpf) {
+                return clienteRepository.findByCpf(cpf);
+        }
 
 
 }

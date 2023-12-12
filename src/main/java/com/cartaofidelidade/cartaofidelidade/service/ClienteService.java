@@ -1,6 +1,7 @@
 package com.cartaofidelidade.cartaofidelidade.service;
 
 import com.cartaofidelidade.cartaofidelidade.model.Cliente;
+import io.micrometer.observation.ObservationFilter;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,4 +19,6 @@ public interface ClienteService {
     Cliente autenticar(String cpf, String senha);
 
     Optional<Cliente> buscarClienteporId(Long id);
+
+    Optional<Cliente> buscarClienteporCpf(String cpf);
 }
