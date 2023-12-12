@@ -40,7 +40,7 @@ public class CarteiraController {
     public ResponseEntity<?> adicionarPontosaCarteira(@PathVariable Long id, @RequestBody Integer pontos){
         try {
             Carteira carteirasalva = lojaService.procurarCarteiraporId(id);
-            lojaService.mudarPontosNaCarteira(id, pontos);
+            lojaService.mudarPontosNaCarteira(carteirasalva, pontos);
             return new ResponseEntity(carteirasalva, HttpStatus.OK);
         }
         catch(RegraNegocioException e){
