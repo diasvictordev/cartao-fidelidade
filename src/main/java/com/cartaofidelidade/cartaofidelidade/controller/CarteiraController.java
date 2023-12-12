@@ -2,15 +2,12 @@ package com.cartaofidelidade.cartaofidelidade.controller;
 
 import com.cartaofidelidade.cartaofidelidade.exceptions.RegraNegocioException;
 import com.cartaofidelidade.cartaofidelidade.model.Carteira;
-import com.cartaofidelidade.cartaofidelidade.model.Cliente;
-import com.cartaofidelidade.cartaofidelidade.model.Loja;
 import com.cartaofidelidade.cartaofidelidade.service.impl.LojaServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController
@@ -78,6 +75,17 @@ public class CarteiraController {
         try {
             Integer pontos = lojaService.buscarQuantidadePontosCarteiraDoUsuario(id);
             return new ResponseEntity(pontos, HttpStatus.OK);
+        }
+        catch(RegraNegocioException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/pontos/{cpf}")
+    public ResponseEntity<?> getCarteiraByCpf(@PathVariable String cpf){
+        try {
+            List<Carteira> carteiras = lojaService.buscarCarteirasPorCpf(cpf);
+            return new ResponseEntity(carteiras, HttpStatus.OK);
         }
         catch(RegraNegocioException e){
             return ResponseEntity.badRequest().body(e.getMessage());

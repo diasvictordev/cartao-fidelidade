@@ -2,6 +2,7 @@ package com.cartaofidelidade.cartaofidelidade.service.impl;
 
 import com.cartaofidelidade.cartaofidelidade.exceptions.RegraNegocioException;
 import com.cartaofidelidade.cartaofidelidade.model.Carteira;
+import com.cartaofidelidade.cartaofidelidade.model.Cliente;
 import com.cartaofidelidade.cartaofidelidade.model.Loja;
 import com.cartaofidelidade.cartaofidelidade.model.userenums.LojaEnums;
 import com.cartaofidelidade.cartaofidelidade.repository.CarteiraRepository;
@@ -200,5 +201,22 @@ public class LojaServiceImpl implements LojaService {
     @Override
     public void deletarCarteira(Long id) {
         carteiraRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Carteira> buscarCarteirasPorCpf(String cpf) {
+        Optional<Cliente> cliente = clienteRepository.findByCpf(cpf);
+        if(cliente.isPresent()){
+            List<Carteira> carteiras = carteiraRepository.findByClienteId(cliente.get().getId());
+            if(!carteiras.isEmpty()){
+                return carteiras;
+            }
+            else{
+                throw new RegraNegocioException("Nenhuma carteira cadastrada!");
+            }
+        }
+        else{
+            throw new RegraNegocioException("Cliente não encontrado!");
+        }
     }
 }

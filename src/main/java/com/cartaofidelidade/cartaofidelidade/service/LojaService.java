@@ -42,4 +42,6 @@ public interface LojaService {
     Optional<Loja> getLojaByCnpj(String cnpj);
 
     void deletarCarteira(Long id);
+
+    List<Carteira> buscarCarteirasPorCpf(String cpf);
 }
