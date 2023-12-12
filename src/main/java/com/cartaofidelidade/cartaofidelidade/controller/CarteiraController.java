@@ -24,12 +24,11 @@ public class CarteiraController {
     }
 
     @PostMapping
-    public ResponseEntity<?> criarCarteira(@RequestBody Carteira carteira, Long clienteId, Long lojaId) {
+    public ResponseEntity<?> criarCarteira(@RequestBody Carteira carteira) {
         try {
             Carteira carteiraASalvar = lojaService.criarCarteira(
-                    carteira.getQuantidadePontos(),
-                    clienteId,
-                    lojaId
+                    carteira
+
             );
             return new ResponseEntity<>(carteira, HttpStatus.CREATED);
         } catch (RegraNegocioException e) {

@@ -27,7 +27,7 @@ public interface LojaService {
 
     Loja autenticarAdmin(String cnpj, String senha, LojaEnums papel);
 
-    Carteira criarCarteira(Integer quantidadePontos, Long clienteId, Long lojaId);
+    Carteira criarCarteira(Carteira carteira);
 
     Carteira procurarCarteiraporId(Long id);
 

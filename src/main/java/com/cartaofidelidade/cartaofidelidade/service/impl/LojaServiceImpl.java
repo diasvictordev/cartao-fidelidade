@@ -2,7 +2,6 @@ package com.cartaofidelidade.cartaofidelidade.service.impl;
 
 import com.cartaofidelidade.cartaofidelidade.exceptions.RegraNegocioException;
 import com.cartaofidelidade.cartaofidelidade.model.Carteira;
-import com.cartaofidelidade.cartaofidelidade.model.Cliente;
 import com.cartaofidelidade.cartaofidelidade.model.Loja;
 import com.cartaofidelidade.cartaofidelidade.model.userenums.LojaEnums;
 import com.cartaofidelidade.cartaofidelidade.repository.CarteiraRepository;
@@ -144,18 +143,7 @@ public class LojaServiceImpl implements LojaService {
     }
 
     @Override
-    public Carteira criarCarteira(Integer quantidadePontos, Long clienteId, Long lojaId) {
-        Cliente cliente = clienteRepository.findById(clienteId)
-                .orElseThrow(() -> new RegraNegocioException("Cliente não encontrado"));
-
-        Loja loja = lojaRepository.findById(lojaId)
-                .orElseThrow(() -> new RegraNegocioException("Loja não encontrada"));
-
-        Carteira carteira = new Carteira();
-        carteira.setCliente(cliente);
-        carteira.setLoja(loja);
-        carteira.setQuantidadePontos(quantidadePontos);
-
+    public Carteira criarCarteira(Carteira carteira) {
         return carteiraRepository.save(carteira);
     }
 
